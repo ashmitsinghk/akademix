@@ -1,4 +1,3 @@
-from audioop import add
 import mysql.connector
 
 dataBase = mysql.connector.connect(
