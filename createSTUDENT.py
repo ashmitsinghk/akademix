@@ -19,6 +19,7 @@ studentRecord = """CREATE TABLE STUDENT (
                    SECTION VARCHAR(10) NOT NULL,
                    DOB DATE NOT NULL,
                    CONTACT_NO BIGINT NOT NULL,
+                   EMAIL VARCHAR(50) NOT NULL,
                    ATTENDANCE INT,
                    MOTHER_NAME VARCHAR(30) NOT NULL,
                    FATHER_NAME VARCHAR(30) NOT NULL,
