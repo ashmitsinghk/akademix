@@ -1,5 +1,6 @@
 import mysql.connector
 
+# Connecting python to MySQL server, database
 dataBase = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -9,24 +10,10 @@ dataBase = mysql.connector.connect(
 
 cursorObject = dataBase.cursor()
 
-# # creating table
-# studentRecord = """CREATE TABLE STUDENT (
-#                    STUDENT_ID INT NOT NULL AUTO_INCREMENT,
-#                    FIRST_NAME  VARCHAR(15) NOT NULL,
-#                    LAST_NAME VARCHAR(15) NOT NULL,
-#                    CLASS INT NOT NULL,
-#                    SECTION VARCHAR(10) NOT NULL,
-#                    DOB DATE NOT NULL,
-#                    CONTACT_NO BIGINT NOT NULL,
-#                    ATTENDANCE INT,
-#                    MOTHER_NAME VARCHAR(30) NOT NULL,
-#                    FATHER_NAME VARCHAR(30) NOT NULL,
-#                    ADDRESS VARCHAR(150) NOT NULL,
-#                    PRIMARY KEY(STUDENT_ID)
-#                    )"""
+cursorObject.execute("SELECT * FROM STUDENT")
+records = cursorObject.fetchall()
 
-# # table created
-# cursorObject.execute(studentRecord)
+# Function to create a new record in STUDENT
 
 
 def addStudent():
@@ -47,7 +34,19 @@ def addStudent():
     cursorObject.execute(sql, val)
     dataBase.commit()
 
+    sql2 = "SELECT * FROM STUDENT WHERE FIRST_NAME = %s AND DOB = %s AND ADDRESS = %s;"
+    val2 = (firstName, dob, address)
 
+    cursorObject.execute(sql2, val2)
+    lastRow = cursorObject.fetchone()
+    print(lastRow)
+
+    tableName = "STUDENT_" + str(lastRow[0])
+    print(tableName)
+    cursorObject.execute("CREATE TABLE IF NOT EXISTS " + tableName + " (SR_NO INT AUTO_INCREMENT, DATE DATE UNIQUE, TIME TIME, PRIMARY KEY(SR_NO));")
+
+
+# Main Menu
 print("=======================================================")
 print("SELECT YOUR OPERATION")
 print("=======================================================")

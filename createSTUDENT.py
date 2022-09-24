@@ -1,3 +1,16 @@
+# run this file on a new mysql server.
+
+import mysql.connector
+
+dataBase = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="123",
+    database="School"
+)
+
+cursorObject = dataBase.cursor()
+
 studentRecord = """CREATE TABLE STUDENT (
                    STUDENT_ID INT NOT NULL AUTO_INCREMENT,
                    FIRST_NAME  VARCHAR(15) NOT NULL,
