@@ -28,10 +28,5 @@ def addStudent():
     dataBase.commit()
 
     studentID = getStudentID(firstName, dob, fatherName)
-
-    tableName = "STUDENT_" + studentID
-    cursorObject.execute("CREATE TABLE IF NOT EXISTS " + tableName +
-                         " (SR_NO INT AUTO_INCREMENT, DATE DATE UNIQUE, TIME TIME, PRIMARY KEY(SR_NO));")
-
     generateQR(studentID)
     sendQR(studentID, email)

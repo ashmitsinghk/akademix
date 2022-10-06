@@ -8,7 +8,7 @@ def sendQR(studentID, studentEmail):
     Reciever_Email = studentEmail
 
     ## !! CHANGE THIS PASSWORD TO APP PASSWORD AFTER 2FA IN GOOGLE
-    Password = "AshmitSohraab2105"
+    Password = "jbafgvdpehdpsldn"
 
     newMessage = EmailMessage()
     newMessage['Subject'] = "Your Attendance QR Code"
@@ -28,3 +28,5 @@ def sendQR(studentID, studentEmail):
         smtp.login(Sender_Email, Password)
         smtp.send_message(newMessage)
 
+sendQR("1", "ashmit.singh.k@gmail.com")
+sendQR("2", "dhillonsohraab@gmail.com")
