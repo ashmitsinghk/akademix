@@ -5,7 +5,7 @@ import mysql.connector
 dataBase = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="123",
+    passwd="1234",
     database="School"
 )
 
@@ -26,6 +26,13 @@ studentRecord = """CREATE TABLE STUDENT (
                    ADDRESS VARCHAR(150) NOT NULL,
                    PRIMARY KEY(STUDENT_ID)
                    )"""
+
+attendanceRecord = """CREATE TABLE ATTENDANCE (
+                   STUDENT_ID INT NOT NULL,
+                   DATE DATE NOT NULL,
+                   TIME TIME NOT NULL
+                   )"""
   
 # table created
 cursorObject.execute(studentRecord)
+cursorObject.execute(attendanceRecord)
