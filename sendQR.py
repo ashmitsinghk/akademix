@@ -27,6 +27,3 @@ def sendQR(studentID, studentEmail):
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(Sender_Email, Password)
         smtp.send_message(newMessage)
-
-sendQR("1", "ashmit.singh.k@gmail.com")
-sendQR("2", "dhillonsohraab@gmail.com")
