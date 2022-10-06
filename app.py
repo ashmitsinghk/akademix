@@ -11,9 +11,9 @@ print("2. Mark Attendance")
 operation = input()
 
 if operation == '1':
-    addStudent()
+    addStudent.addStudent()
 elif operation == '2':
-    scanner()
+    scanner.open_scanner()
 
 # disconnecting from server
 dataBase.close()
