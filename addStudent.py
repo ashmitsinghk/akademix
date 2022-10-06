@@ -27,6 +27,6 @@ def addStudent():
     cursorObject.execute(sql, val)
     dataBase.commit()
 
-    studentID = getStudentID(firstName, dob, fatherName)
-    generateQR(studentID)
-    sendQR(studentID, email)
+    studentID = getStudentID.getStudentID(firstName, dob, fatherName)
+    generateQR.generateQR(studentID)
+    sendQR.sendQR(studentID, email)
