@@ -21,7 +21,7 @@ def decoder(image):
 
 def process_code(barcodeData):
     print("cancel timer")
-    myTimer.cancel()
+    Timer(10.0, time_out_exit).cancel()
     # i = 0
     # while i < 10:
     #     print("processing code for " + str(i) + " seconds")
@@ -37,7 +37,7 @@ def time_out_exit() :
     os._exit(0)()
 
 def open_scanner():
-    myTimer.start()
+    Timer(10.0, time_out_exit).start()
     #add cv2.CAP_DSHOW on windows while developing, remove on RBPI
     cap = cv2.VideoCapture(0 , cv2.CAP_DSHOW)
     #cap = cv2.VideoCapture(0)
@@ -49,7 +49,5 @@ def open_scanner():
         if code == ord('q'):
             exit()
 
-
-globals()['myTimer'] = Timer(10.0, time_out_exit)
 if __name__ == '__main__':
     open_scanner()
