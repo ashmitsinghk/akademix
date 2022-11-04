@@ -1,6 +1,7 @@
 import database
 import tkinter as tk
 from tkinter import *
+from tkinter import ttk
 import tkinter.messagebox as MessageBox
 
 
@@ -10,26 +11,58 @@ dataBase = database.dataBase
 window = tk.Tk()
 window.geometry("600x300")
 window.title("View by class")
-master = Tk()
-variable = StringVar(master)
-label1 = Label(master, text = "Username").place(x = 30,y = 50) 
-variable = set("Select your Class") # default value
-w = OptionMenu(master, variable, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
-w.pack()
+
+dropdown_section = StringVar(window)
+dropdown_section.set("SELECT") 
+
+def getStudents():
+   grade = dropdown_grade.get()
+   section = dropdown_section.get()
+   window.destroy()
+
+   root = tk.Tk()
+   root.title("Student Records")
+   label = tk.Label(root, text="Student Records", font=("Arial",30)).grid(row=0, columnspan=3)
+   
+   cols = ("STUDENT_ID", "FIRST_NAME", "LAST_NAME", "DOB")
+   listBox = ttk.Treeview(root, columns=cols, show='headings')
+   
+   for col in cols:
+      listBox.heading(col, text=col)    
+      listBox.grid(row=1, column=0, columnspan=2)
+   closeButton = tk.Button(root, text="Close", width=15, command=exit).grid(row=4, column=1)
+
+   cursorObject.execute(f"SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, DOB FROM student WHERE CLASS='{grade}' AND SECTION='{section}';")
+   records = cursorObject.fetchall()
+   print(records)
+   
+   for i, (STUDENT_ID, FIRST_NAME, LAST_NAME, DOB) in enumerate(records, start=1):
+      listBox.insert("", "end", values=(STUDENT_ID, FIRST_NAME, LAST_NAME, DOB))
+      dataBase.close()
+   
+
+
+def callback(*args):
+   print("dropdown_grade changed!")
+   if int(dropdown_grade.get())<=10:
+      e_section = OptionMenu(window, dropdown_section, "A", "B")
+
+   else:
+      e_section = OptionMenu(window, dropdown_section, "Arts", "Commerce", "Science")
+   e_section.pack()
+   e_section.place(x=200, y=120)
+
+dropdown_grade = StringVar(window)
+dropdown_grade.trace("w", callback)
+dropdown_grade.set("Select your Class") # default value
+
+e_grade = OptionMenu(window, dropdown_grade, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
+e_grade.pack()
+e_grade.place(x=200, y=90)
+
+insertbtn = Button(window, text="Show Students", font=('italic', 10), bg="white", command=getStudents)
+insertbtn.place(x=200, y = 150)
 
 mainloop()
-# grade = str(input("Enter grade: "))
-# section = str(input("Enter section: "))
-    
-# cursorObject.execute(f"SELECT * FROM STUDENT WHERE CLASS = '" + grade + "' AND SECTION = '" + section + "';")
-
-# def selectGrade():
-#     i = 0
-#     for student in cursorObject:
-#         for j in range(len(student)):
-#             entry = Label(window, width=10, text=student[j], borderwidth=2, relief='ridge')
-#             entry.grid(row = i, column = j)
-#             entry.insert(END, student[j])
-#         i += 1
 window.mainloop()
 

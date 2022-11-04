@@ -1,22 +1,28 @@
-import database, scanner
+import scanner
+import tkinter as tk
+from tkinter import *
 
-cursorObject = database.cursorObject
-dataBase = database.dataBase
-# Main Menu
-print("=======================================================")
-print("SELECT YOUR OPERATION")
-print("=======================================================")
-print("1. Add New Student")
-print("2. Mark Attendance")
-print("3. View students by class")
-operation = input()
-
-if operation == '1':
+def newStudent():
+    root.destroy()
     import addStudent
-elif operation == '2':
+
+def markAttendance():
+    root.destroy()
     scanner.open_scanner()
-elif operation == '3':
+
+def viewByClass():
+    root.destroy()
     import selectGrade
 
-# disconnecting from server
-dataBase.close()
+root = tk.Tk()
+root.geometry("400x250")
+root.title("Akademix Records")
+
+addbtn = Button(root, text="Add New Student", font=('italic', 10), bg="white", command=newStudent)
+addbtn.place(x=130, y = 50)
+attendancebtn = Button(root, text="Mark Attendance", font=('italic', 10), bg="white", command=markAttendance)
+attendancebtn.place(x=130, y = 125)
+gradebtn = Button(root, text="View Students by Class", font=('italic', 10), bg="white", command=viewByClass)
+gradebtn.place(x=130, y = 200)
+
+root.mainloop()
