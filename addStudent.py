@@ -37,8 +37,8 @@ dataBase = database.dataBase
 def insert():
        firstName = e_firstName.get()
        lastName = e_lastName.get()
-       grade = e_grade.get()
-       section = e_section.get()
+       grade = dropdown_grade.get()
+       section = dropdown_section.get()
        dob = e_dob.get()
        contact = e_contact.get()
        email = e_email.get()
@@ -62,9 +62,22 @@ window = tk.Tk()
 window.geometry("600x500")
 window.title("Add Student")
 
+def callback(*args):
+   print("dropdown_grade changed!")
+   if int(dropdown_grade.get())<=10:
+      e_section = OptionMenu(window, dropdown_section, "A", "B")
 
-variable = StringVar(window)
-variable.set("1") 
+   else:
+      e_section = OptionMenu(window, dropdown_section, "Arts", "Commerce", "Science")
+   e_section.pack()
+   e_section.place(x=200, y=120)
+
+
+dropdown_grade = StringVar()
+dropdown_grade.trace("w", callback)
+dropdown_grade.set("1")
+dropdown_section = StringVar(window)
+dropdown_section.set("SELECT") 
 
 firstName = Label(window, text = "Enter First Name:", font = ('bold', 10))
 firstName.place(x=20, y=30)
@@ -91,11 +104,11 @@ e_firstName = Entry()
 e_firstName.place(x=200, y=30)
 e_lastName = Entry()
 e_lastName.place(x=200, y=60)
-e_grade = OptionMenu(window, variable, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
+e_grade = OptionMenu(window, dropdown_grade, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
 e_grade.pack()
 e_grade.place(x=200, y=90)
-e_section = Entry()
-e_section.place(x=200, y=120)
+# e_section = Entry()
+# e_section.place(x=200, y=120)
 e_dob = Entry()
 e_dob.place(x=200, y=150)
 e_contact = Entry()
