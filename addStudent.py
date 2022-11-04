@@ -2,6 +2,8 @@ import database, generateQR, sendQR, getStudentID
 import tkinter as tk
 from tkinter import *
 import tkinter.messagebox as MessageBox
+from tkcalendar import Calendar
+import datetime
 
 cursorObject = database.cursorObject
 dataBase = database.dataBase
@@ -34,12 +36,25 @@ dataBase = database.dataBase
 
 # Function to create a new record in STUDENT
 
+
+def setDate():
+   def grad_date():
+      date.config(text = cal.get_date())
+      root.destroy()
+   root = Toplevel(window)
+   root.geometry("300x300")
+   root.title("Date Selector")
+   cal = Calendar(root, selectmode = 'day')
+   cal.pack(pady = 20)
+   Button(root, text = "Set Date", font= ('italic', 15),
+       command = grad_date).pack(pady = 20)
+
 def insert():
        firstName = e_firstName.get()
        lastName = e_lastName.get()
        grade = dropdown_grade.get()
        section = dropdown_section.get()
-       dob = e_dob.get()
+       dob = datetime.datetime.strptime(date.cget("text"), '%m/%d/%y').strftime('%y-%m-%d')
        contact = e_contact.get()
        email = e_email.get()
        motherName = e_motherName.get()
@@ -62,6 +77,9 @@ window = tk.Tk()
 window.geometry("600x500")
 window.title("Add Student")
 
+dropdown_section = StringVar(window)
+dropdown_section.set("SELECT") 
+
 def callback(*args):
    print("dropdown_grade changed!")
    if int(dropdown_grade.get())<=10:
@@ -73,11 +91,18 @@ def callback(*args):
    e_section.place(x=200, y=120)
 
 
+
+
+ 
+
+ 
+# Add Button and Label
+
+
 dropdown_grade = StringVar()
 dropdown_grade.trace("w", callback)
 dropdown_grade.set("1")
-dropdown_section = StringVar(window)
-dropdown_section.set("SELECT") 
+
 
 firstName = Label(window, text = "Enter First Name:", font = ('bold', 10))
 firstName.place(x=20, y=30)
@@ -99,6 +124,8 @@ fatherName = Label(window, text = "Enter Father's Name:", font = ('bold', 10))
 fatherName.place(x=20, y=270)
 address = Label(window, text = "Enter Address:", font = ('bold', 10))
 address.place(x=20, y=300)
+date = Label(window, text = "")
+date.place(x=300, y=150)
 
 e_firstName = Entry()
 e_firstName.place(x=200, y=30)
@@ -107,10 +134,8 @@ e_lastName.place(x=200, y=60)
 e_grade = OptionMenu(window, dropdown_grade, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
 e_grade.pack()
 e_grade.place(x=200, y=90)
-# e_section = Entry()
-# e_section.place(x=200, y=120)
-e_dob = Entry()
-e_dob.place(x=200, y=150)
+dobbtn = Button(window, text="Select Date", font=('italic', 8), bg="white", command=setDate)
+dobbtn.place(x=200, y = 150)
 e_contact = Entry()
 e_contact.place(x=200, y=180)
 e_email = Entry()
@@ -124,6 +149,7 @@ e_address.place(x=200, y=300)
 
 insertbtn = Button(window, text="Add Student to Database", font=('italic', 10), bg="white", command=insert)
 insertbtn.place(x=200, y = 330)
+
 
 
 
