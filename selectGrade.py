@@ -10,6 +10,14 @@ dataBase = database.dataBase
 window = tk.Tk()
 window.geometry("600x300")
 window.title("View by class")
+master = Tk()
+variable = StringVar(master)
+label1 = Label(master, text = "Username").place(x = 30,y = 50) 
+variable = set("Select your Class") # default value
+w = OptionMenu(master, variable, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
+w.pack()
+
+mainloop()
 # grade = str(input("Enter grade: "))
 # section = str(input("Enter section: "))
     
