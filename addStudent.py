@@ -129,7 +129,7 @@ def addStudent():
    e_address = Entry()
    e_address.place(x=200, y=330)
 
-   insertbtn = Button(window, text="Add Student to Database", font=('italic', 10), bg="white", command=insert)
+   insertbtn = Button(window, text="Add Student to Database", font=('italic', 10), bg="white", command=lambda:[insert(),clear()])
    insertbtn.place(x=200, y = 330)
    clearbtn = Button(window, text="Clear", font=('italic', 10), bg="white", command=clear)
    clearbtn.place(x=450, y = 330)
