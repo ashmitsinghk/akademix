@@ -3,8 +3,8 @@ import numpy as np
 from pyzbar.pyzbar import decode
 import time
 from threading import Timer
-import os
-import markAttendance
+import os, subprocess
+import markAttendance, akademix
 
 
 def decoder(image):
@@ -29,11 +29,14 @@ def process_code(barcodeData):
     #     time.sleep(1)
     print(str(barcodeData) + " is processed")
     markAttendance.markAttendance(str(barcodeData))
+    subprocess.Popen(['python', 'akademix.py'])
     os._exit(0)()
+
 
 
 def time_out_exit() :
     print("No QR Code Found")
+    subprocess.Popen(['python', 'akademix.py'])
     os._exit(0)()
 
 def open_scanner():

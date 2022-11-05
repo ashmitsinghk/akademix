@@ -17,11 +17,14 @@ def selectGrade():
    dropdown_section = StringVar(window)
    dropdown_section.set("Select Section") 
 
-   def back():
+   def home():
       window.destroy()
       akademix.homeScreen()
 
    def getStudents():
+      def back():
+         root.destroy()
+         selectGrade()
       grade = dropdown_grade.get()
       section = dropdown_section.get()
       window.destroy()
@@ -37,6 +40,7 @@ def selectGrade():
          listBox.heading(col, text=col)    
          listBox.grid(row=1, column=0, columnspan=2)
       closeButton = tk.Button(root, text="Close", width=15, command=exit).grid(row=4, column=1)
+      backButton = tk.Button(root, text="Back", width=15, command=back).grid(row=4, column=0)
 
       cursorObject.execute(f"SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, DOB FROM student WHERE CLASS='{grade}' AND SECTION='{section}';")
       records = cursorObject.fetchall()
@@ -68,7 +72,7 @@ def selectGrade():
 
    insertbtn = Button(window, text="Show Students", font=('italic', 10), bg="white", command=getStudents)
    insertbtn.place(x=200, y = 150)
-   homebtn = Button(window, text="< Back", font=('italic', 10), bg="white", command=back)
+   homebtn = Button(window, text="< Back", font=('italic', 10), bg="white", command=home)
    homebtn.place(x=20, y = 20)
 
    window.mainloop()
