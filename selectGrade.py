@@ -47,9 +47,7 @@ def selectGrade():
       print(records)
       
       for i, (STUDENT_ID, FIRST_NAME, LAST_NAME, DOB) in enumerate(records, start=1):
-         listBox.insert("", "end", values=(STUDENT_ID, FIRST_NAME, LAST_NAME, DOB))
-         dataBase.close()
-      
+         listBox.insert("", "end", values=(STUDENT_ID, FIRST_NAME, LAST_NAME, DOB))      
 
 
    def callback(*args):

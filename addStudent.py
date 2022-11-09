@@ -130,9 +130,9 @@ def addStudent():
    e_address.place(x=200, y=330)
 
    insertbtn = Button(window, text="Add Student to Database", font=('italic', 10), bg="white", command=lambda:[insert(),clear()])
-   insertbtn.place(x=200, y = 330)
+   insertbtn.place(x=200, y = 360)
    clearbtn = Button(window, text="Clear", font=('italic', 10), bg="white", command=clear)
-   clearbtn.place(x=450, y = 330)
+   clearbtn.place(x=450, y = 360)
    homebtn = Button(window, text="< Back", font=('italic', 10), bg="white", command=back)
    homebtn.place(x=20, y = 20)
 

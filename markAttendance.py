@@ -13,6 +13,8 @@ def markAttendance(studentID):
             VALUES(%s, %s, %s);"
         val = (studentID, str(date.today()) , datetime.now().strftime("%H:%M:%S"))
         cursorObject.execute(sql, val)
+        sql2 = f"UPDATE STUDENT SET ATTENDANCE = ATTENDANCE + 1 WHERE STUDENT_ID = {studentID};"
+        cursorObject.execute(sql2)
         dataBase.commit()
     else:
         print("Attendance already marked for today.")
