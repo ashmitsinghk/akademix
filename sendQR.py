@@ -16,7 +16,7 @@ def sendQR(studentID, studentEmail):
     newMessage['To'] = Reciever_Email
     newMessage.set_content(' ')
 
-    with open("./QR/QR_STUDENT_" + studentID + ".png", 'rb') as f:
+    with open(f"./QR/QR_STUDENT_{studentID}.png", 'rb') as f:
         image_data = f.read()
         image_type = imghdr.what(f.name)
         image_name = f.name

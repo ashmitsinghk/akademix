@@ -1,4 +1,4 @@
-import scanner, addStudent, selectGrade, searchStudent
+import scanner, addStudent, selectGrade, searchStudent, tables
 import tkinter as tk
 from tkinter import *
 
@@ -24,8 +24,11 @@ def homeScreen():
     root.geometry("500x400")
     root.title("Akademix Records")
 
-    title = Label(root, text="Akademix Records", font=('Bold', 30))
-    title.place(x=75, y=50)
+    tables.createTables()
+
+    logo = PhotoImage(file="AKADEMIX.png")
+    title = Label(root, image=logo)
+    title.place(x=0, y=-20)
 
     addbtn = Button(root, text="Add New Student", font=('italic', 10), bg="white", command=newStudent, width=25, height=5)
     addbtn.place(x=35, y = 150)
