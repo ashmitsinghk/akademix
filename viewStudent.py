@@ -7,6 +7,11 @@ cursorObject = database.cursorObject
 dataBase = database.dataBase
 
 def viewStudent(admission_no):
+
+    def back():
+        root.destroy()
+        searchStudent.searchStudent()
+
     sql = f"SELECT * FROM STUDENT WHERE STUDENT_ID = {admission_no};"
 
     cursorObject.execute(sql)
@@ -77,6 +82,8 @@ def viewStudent(admission_no):
     value_address = Label(root, text=address)
     value_address.place(x=150, y=270)
 
+    homebtn = Button(root, text="< Back", font=('italic', 10), bg="white", command=back)
+    homebtn.place(x=20, y = 20)
     
 
     root.mainloop()

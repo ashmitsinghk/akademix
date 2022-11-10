@@ -33,7 +33,7 @@ def selectGrade():
       root.title("Student Records")
       label = tk.Label(root, text="Student Records", font=("Arial",30)).grid(row=0, columnspan=3)
       
-      cols = ("STUDENT_ID", "FIRST_NAME", "LAST_NAME", "DOB")
+      cols = ("Roll No.", "FIRST_NAME", "LAST_NAME", "DOB")
       listBox = ttk.Treeview(root, columns=cols, show='headings')
       
       for col in cols:
@@ -42,12 +42,12 @@ def selectGrade():
       closeButton = tk.Button(root, text="Close", width=15, command=exit).grid(row=4, column=1)
       backButton = tk.Button(root, text="Back", width=15, command=back).grid(row=4, column=0)
 
-      cursorObject.execute(f"SELECT STUDENT_ID, FIRST_NAME, LAST_NAME, DOB FROM student WHERE CLASS='{grade}' AND SECTION='{section}';")
+      cursorObject.execute(f"SELECT @n := @n + 1 n, first_name, last_name, dob FROM STUDENT, (SELECT @n := 0) m WHERE CLASS='{grade}' AND SECTION='{section}' ORDER BY first_name, last_name;")
       records = cursorObject.fetchall()
       print(records)
       
-      for i, (STUDENT_ID, FIRST_NAME, LAST_NAME, DOB) in enumerate(records, start=1):
-         listBox.insert("", "end", values=(STUDENT_ID, FIRST_NAME, LAST_NAME, DOB))      
+      for i, (n, FIRST_NAME, LAST_NAME, DOB) in enumerate(records, start=1):
+         listBox.insert("", "end", values=(int(n), FIRST_NAME, LAST_NAME, DOB))      
 
 
    def callback(*args):
