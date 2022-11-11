@@ -29,7 +29,6 @@ def searchStudent():
 
         cursorObject.execute(f"SELECT STUDENT_ID, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS STUDENT_NAME, CONCAT(CLASS, ' ', SECTION) AS CLASS FROM student WHERE CONCAT(FIRST_NAME, ' ', LAST_NAME) LIKE '%{name}%';")
         records = cursorObject.fetchall()
-        print(records)
       
         for i, (STUDENT_ID, STUDENT_NAME, CLASS) in enumerate(records, start=1):
             listBox.insert("", "end", values=(STUDENT_ID, STUDENT_NAME, CLASS))

@@ -91,7 +91,6 @@ def addStudent():
     dropdown_section.set("Select Section")
 
     def callback(*args):
-        print("dropdown_grade changed!")
         if int(dropdown_grade.get()) <= 10:
             e_section = OptionMenu(window, dropdown_section, "A", "B")
 

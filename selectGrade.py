@@ -44,14 +44,12 @@ def selectGrade():
 
       cursorObject.execute(f"SELECT @n := @n + 1 n, first_name, last_name, dob FROM STUDENT, (SELECT @n := 0) m WHERE CLASS='{grade}' AND SECTION='{section}' ORDER BY first_name, last_name;")
       records = cursorObject.fetchall()
-      print(records)
       
       for i, (n, FIRST_NAME, LAST_NAME, DOB) in enumerate(records, start=1):
          listBox.insert("", "end", values=(int(n), FIRST_NAME, LAST_NAME, DOB))      
 
 
    def callback(*args):
-      print("dropdown_grade changed!")
       if int(dropdown_grade.get())<=10:
          e_section = OptionMenu(window, dropdown_section, "A", "B")
 

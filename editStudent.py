@@ -2,7 +2,7 @@ import database
 import viewStudent
 import tkinter as tk
 from tkinter import *
-import tkinter.messagebox as MessageBox
+from tkinter import messagebox
 from tkcalendar import Calendar
 import datetime
 
@@ -44,8 +44,7 @@ def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_se
                 lastName = e_lastName.get()
                 grade = dropdown_grade.get()
                 section = dropdown_section.get()
-                dob = datetime.datetime.strptime(
-                    date.cget("text"), '%m/%d/%y').strftime('%y-%m-%d')
+                dob = date.cget("text")
                 contact = e_contact.get()
                 email = e_email.get()
                 motherName = e_motherName.get()
@@ -56,7 +55,7 @@ def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_se
                 sql = f"UPDATE STUDENT SET FIRST_NAME = '{firstName}', LAST_NAME = '{lastName}', CLASS = {grade}, SECTION = '{section}', DOB = '{dob}', CONTACT_NO = {contact}, EMAIL = '{email}', MOTHER_NAME = '{motherName}', FATHER_NAME = '{fatherName}', ADDRESS = '{address}' WHERE STUDENT_ID = {arg_admission_no};"
                 cursorObject.execute(sql)
                 dataBase.commit()
-                print("Student Data Updated Successfully.")
+                messagebox.showinfo("Operation Successful", "Student Data Updated Successfully.")
                 root2.destroy()
                 clear()
             else:
@@ -83,7 +82,6 @@ def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_se
     dropdown_section.set(arg_section)
 
     def callback(*args):
-        print("dropdown_grade changed!")
         if int(dropdown_grade.get()) <= 10:
             e_section = OptionMenu(window, dropdown_section, "A", "B")
 
