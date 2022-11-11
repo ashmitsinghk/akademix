@@ -33,7 +33,7 @@ def searchStudent():
       
         for i, (STUDENT_ID, STUDENT_NAME, CLASS) in enumerate(records, start=1):
             listBox.insert("", "end", values=(STUDENT_ID, STUDENT_NAME, CLASS))
-            listBox.place(x=20, y=80)
+        listBox.place(x=20, y=80)
     
     root = tk.Tk()
     root.geometry("700x500")

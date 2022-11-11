@@ -1,4 +1,4 @@
-import searchStudent, database, sendQR
+import searchStudent, database, sendQR, editStudent
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
@@ -23,6 +23,10 @@ def viewStudent(admission_no):
         os.remove(f"./QR/QR_STUDENT_{admission_no}.png")
         root.destroy()
         searchStudent.searchStudent()
+
+    def edit():
+        root.destroy()
+        editStudent.editStudent(admission_no, firstName, lastName, grade, section, dob, contact, email, motherName, fatherName, address)
 
 
     sql = f"SELECT * FROM STUDENT WHERE STUDENT_ID = {admission_no};"
@@ -95,16 +99,9 @@ def viewStudent(admission_no):
     value_address = Label(root, text=address)
     value_address.place(x=150, y=300)
 
-    QR = Image.open(f"./QR/QR_STUDENT_{admission_no}.png")
-    resize_QR = QR.resize((90,90))
-    studentQR = ImageTk.PhotoImage(resize_QR)
-    label_QR = Label(image=studentQR)
-    label_QR.place(x=50,y=350)
 
-    emailbtn = Button(root, text="Send QR via email", font=('italic', 10), width=20, height=2, command=sendViaEmail)
-    emailbtn.place(x=160, y=350)
 
-    editbtn = Button(root, text="Edit", font=('italic', 10), width=9, height=2)
+    editbtn = Button(root, text="Edit", font=('italic', 10), width=9, height=2, command=edit)
     editbtn.place(x=160, y=400)
 
     deletebtn = Button(root, text="Delete", font=('italic', 10), width=9, height=2, command=deleteStudent)
@@ -113,8 +110,16 @@ def viewStudent(admission_no):
     homebtn = Button(root, text="< Back", font=('italic', 10), bg="white", command=back)
     homebtn.place(x=20, y = 20)
     
+    QR = Image.open(f"./QR/QR_STUDENT_{admission_no}.png")
+    resize_QR = QR.resize((90,90))
+    studentQR = ImageTk.PhotoImage(resize_QR)
+    label_QR = Label(image=studentQR)
+    label_QR.place(x=50,y=350)
 
+    emailbtn = Button(root, text="Send QR via email", font=('italic', 10), width=20, height=2, command=sendViaEmail)
+    emailbtn.place(x=160, y=350)
+    
     root.mainloop()
 
 if __name__ == '__main__':
-    viewStudent(1)
+    viewStudent(3)

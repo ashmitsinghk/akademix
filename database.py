@@ -9,3 +9,5 @@ dataBase = mysql.connector.connect(
 )
 
 cursorObject = dataBase.cursor()
+
+print(dataBase._password)

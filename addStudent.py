@@ -32,6 +32,9 @@ def addStudent():
       addStudent()
 
    def insert():
+
+
+
          firstName = e_firstName.get()
          lastName = e_lastName.get()
          grade = dropdown_grade.get()
