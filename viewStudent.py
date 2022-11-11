@@ -18,11 +18,37 @@ def viewStudent(admission_no):
         sendQR.sendQR(admission_no, email)
     
     def deleteStudent():
-        cursorObject.execute(f"DELETE FROM STUDENT WHERE STUDENT_ID = {admission_no}")
-        dataBase.commit()
-        os.remove(f"./QR/QR_STUDENT_{admission_no}.png")
-        root.destroy()
-        searchStudent.searchStudent()
+
+        root2 = Toplevel(root)
+        root2.geometry("300x200")
+        root2.title("Enter Database Password")
+
+        def submit():
+            if passEntry.get() == database.dataBase._password:
+                cursorObject.execute(f"DELETE FROM STUDENT WHERE STUDENT_ID = {admission_no}")
+                dataBase.commit()
+                os.remove(f"./QR/QR_STUDENT_{admission_no}.png")
+                root.destroy()
+                searchStudent.searchStudent()
+                root2.destroy()
+                back()
+            else:
+                errorLabel = Label(
+                    root2, text="Incorrect Password, Please try again.")
+                errorLabel.place(x=20, y=130)
+
+        passLabel = Label(root2, text="Enter your MySQL Password:")
+        passLabel.place(x=20, y=20)
+
+        passEntry = Entry(root2)
+        passEntry.place(x=20, y=50)
+
+        submitbtn = Button(root2, text="Submit", font=(
+            'italic', 10), command=submit)
+        submitbtn.place(x=20, y=80)
+        root2.mainloop()
+
+        
 
     def edit():
         root.destroy()
