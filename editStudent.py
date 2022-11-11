@@ -51,7 +51,7 @@ def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_se
       
    window = tk.Tk()
    window.geometry("600x500")
-   window.title("Add Student")
+   window.title("Edit Student")
 
    dropdown_section = StringVar(window)
    dropdown_section.set(arg_section) 

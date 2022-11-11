@@ -33,27 +33,27 @@ def searchStudent():
       
         for i, (STUDENT_ID, STUDENT_NAME, CLASS) in enumerate(records, start=1):
             listBox.insert("", "end", values=(STUDENT_ID, STUDENT_NAME, CLASS))
-        listBox.place(x=20, y=80)
+        listBox.place(x=35, y=80)
     
     root = tk.Tk()
-    root.geometry("700x500")
+    root.geometry("740x500")
     root.title("Search Student")
 
-    name = Label(root, text = "Enter Name:", font = ('bold', 10))
+    name = Label(root, text = "Enter Student Name:", font = ('bold', 10))
     name.place(x=20, y=50)
-    e_Name = Entry(width=70)
-    e_Name.place(x=120, y=50)
+    e_Name = Entry(width=72)
+    e_Name.place(x=160, y=50)
 
     searchbtn = Button(root, text="Search", font=('italic', 9), command=getResult)
-    searchbtn.place(x=570, y=45)
+    searchbtn.place(x=600, y=45)
     
     admission = Label(root, text = "Enter Admission No.:", font = ('bold', 10))
     admission.place(x=20, y=350)
-    e_admission = Entry(width=50)
-    e_admission.place(x=160, y=350)
+    e_admission = Entry(width=71)
+    e_admission.place(x=167, y=350)
 
     viewbtn = Button(root, text="View Profile", font=('italic', 9), command=viewStudentByID)
-    viewbtn.place(x=500, y=345)
+    viewbtn.place(x=600, y=345)
 
     homebtn = Button(root, text="< Back", font=('italic', 10), bg="white", command=home)
     homebtn.place(x=20, y = 5)

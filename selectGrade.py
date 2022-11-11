@@ -58,7 +58,7 @@ def selectGrade():
       else:
          e_section = OptionMenu(window, dropdown_section, "Arts", "Commerce", "Science")
       e_section.pack()
-      e_section.place(x=200, y=120)
+      e_section.place(x=250, y=90)
 
    dropdown_grade = StringVar(window)
    dropdown_grade.trace("w", callback)
@@ -69,7 +69,7 @@ def selectGrade():
    e_grade.place(x=200, y=90)
 
    insertbtn = Button(window, text="Show Students", font=('italic', 10), bg="white", command=getStudents)
-   insertbtn.place(x=200, y = 150)
+   insertbtn.place(x=225, y = 130)
    homebtn = Button(window, text="< Back", font=('italic', 10), bg="white", command=home)
    homebtn.place(x=20, y = 20)
 
