@@ -1,7 +1,7 @@
 import searchStudent, database, sendQR, editStudent
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk
+from tkinter import messagebox
 from PIL import Image, ImageTk
 import os
 
@@ -16,6 +16,8 @@ def viewStudent(admission_no):
     
     def sendViaEmail():
         sendQR.sendQR(admission_no, email)
+        messagebox.showinfo("Operation Successful", "QR Code sent to registered email successfully.")
+
     
     def deleteStudent():
 
@@ -28,9 +30,10 @@ def viewStudent(admission_no):
                 cursorObject.execute(f"DELETE FROM STUDENT WHERE STUDENT_ID = {admission_no}")
                 dataBase.commit()
                 os.remove(f"./QR/QR_STUDENT_{admission_no}.png")
+                messagebox.showinfo("Operation Successful", "Student Data Removed Successfully.")
                 root.destroy()
-                searchStudent.searchStudent()
                 root2.destroy()
+                searchStudent.searchStudent()
                 back()
             else:
                 errorLabel = Label(

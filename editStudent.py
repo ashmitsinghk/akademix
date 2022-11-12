@@ -1,5 +1,6 @@
 import database
 import viewStudent
+from checkEmail import checkEmail
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
@@ -29,10 +30,6 @@ def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_se
         window.destroy()
         viewStudent.viewStudent(arg_admission_no)
 
-    def clear():
-        window.destroy()
-        editStudent()
-
     def insert():
         root2 = Toplevel(window)
         root2.geometry("300x200")
@@ -57,7 +54,9 @@ def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_se
                 dataBase.commit()
                 messagebox.showinfo("Operation Successful", "Student Data Updated Successfully.")
                 root2.destroy()
-                clear()
+                window.destroy()
+                viewStudent.viewStudent(arg_admission_no)
+
             else:
                 errorLabel = Label(
                     root2, text="Incorrect Password, Please try again.")
@@ -90,6 +89,20 @@ def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_se
                 window, dropdown_section, "Arts", "Commerce", "Science")
         e_section.pack()
         e_section.place(x=200, y=150)
+    
+    def validateEmail(*args):
+        if checkEmail(e_email.get()):
+            emailLabel = Label(window, text="   ", width=200)
+        else:
+            emailLabel = Label(window, text="Please enter a valid Email Address.", foreground='Red')
+        emailLabel.place(x=340, y=240)
+
+    def validatePhone(*args):
+        if len(e_contact.get()) == 10:
+           phoneLabel = Label(window, text="   ", width=200)
+        else:
+            phoneLabel = Label(window, text="Please enter a valid Contact No.", foreground='Red')
+        phoneLabel.place(x=340, y=210)
 
     # Add Button and Label
 
@@ -146,8 +159,12 @@ def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_se
     dobbtn = Button(window, text="Select Date", font=(
         'italic', 8), bg="white", command=setDate)
     dobbtn.place(x=200, y=180)
+    contactVar = StringVar()
+    contactVar.trace("w", validatePhone)
     e_contact = Entry(textvariable=contactVar)
     e_contact.place(x=200, y=210)
+    emailVar = StringVar()
+    emailVar.trace("w", validateEmail)
     e_email = Entry(textvariable=emailVar)
     e_email.place(x=200, y=240)
     e_motherName = Entry(textvariable=motherNameVar)
