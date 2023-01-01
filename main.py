@@ -1,4 +1,4 @@
-import scanner, addStudent, selectGrade, searchStudent, tables
+from functionalities import *
 import tkinter as tk
 from tkinter import *
 

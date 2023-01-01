@@ -1,6 +1,4 @@
-import database
-import viewStudent
-from checkEmail import checkEmail
+from functionalities import database, viewStudent, checkEmail
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
@@ -12,7 +10,7 @@ cursorObject = database.cursorObject
 dataBase = database.dataBase
 
 
-def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_section, arg_dob, arg_contact, arg_email, arg_motherName, arg_fatherName, arg_address):
+def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_gender, arg_grade, arg_section, arg_dob, arg_contact, arg_email, arg_motherName, arg_fatherName, arg_address):
     def setDate():
         def grad_date():
             date.config(text=datetime.datetime.strptime(
@@ -91,7 +89,7 @@ def editStudent(arg_admission_no, arg_firstName, arg_lastName, arg_grade, arg_se
         e_section.place(x=200, y=150)
     
     def validateEmail(*args):
-        if checkEmail(e_email.get()):
+        if checkEmail.checkEmail(e_email.get()):
             emailLabel = Label(window, text="   ", width=200)
         else:
             emailLabel = Label(window, text="Please enter a valid Email Address.", foreground='Red')

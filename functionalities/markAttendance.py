@@ -1,4 +1,4 @@
-import database
+from functionalities import database
 from datetime import date, datetime
 
 cursorObject = database.cursorObject

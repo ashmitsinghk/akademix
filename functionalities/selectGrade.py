@@ -1,9 +1,9 @@
-import database
+from functionalities import database
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox as MessageBox
-import akademix
+import os
 
 
 cursorObject = database.cursorObject
@@ -19,7 +19,7 @@ def selectGrade():
 
    def home():
       window.destroy()
-      akademix.homeScreen()
+      os.system('python .\main.py')
 
    def getStudents():
       def back():

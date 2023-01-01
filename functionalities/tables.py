@@ -1,6 +1,6 @@
 # run this file on a new mysql server.
 
-import database
+from functionalities import database
 cursorObject = database.cursorObject
 dataBase = database.dataBase
 
@@ -9,6 +9,7 @@ def createTables():
                     STUDENT_ID INT NOT NULL AUTO_INCREMENT,
                     FIRST_NAME  VARCHAR(15) NOT NULL,
                     LAST_NAME VARCHAR(15) NOT NULL,
+                    GENDER VARCHAR(6) NOT NULL,
                     CLASS INT NOT NULL,
                     SECTION VARCHAR(10) NOT NULL,
                     DOB DATE NOT NULL,

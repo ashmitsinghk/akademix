@@ -1,7 +1,8 @@
-import akademix, database, viewStudent
+from functionalities import database, viewStudent
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import os
 
 cursorObject = database.cursorObject
 dataBase = database.dataBase
@@ -14,7 +15,7 @@ def searchStudent():
     
     def home():
         root.destroy()
-        akademix.homeScreen()
+        os.system('python .\main.py')
 
     def getResult():
         name = e_Name.get()

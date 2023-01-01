@@ -1,4 +1,4 @@
-import database
+from functionalities import database
 
 cursorObject = database.cursorObject
 dataBase = database.dataBase

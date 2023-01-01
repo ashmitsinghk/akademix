@@ -1,0 +1,8 @@
+tkcalendar
+mysql-connector-python
+PyQRCode
+pypng
+opencv-python
+numpy
+pyzbar
+pillow

@@ -1,14 +1,10 @@
-import database
-import generateQR
-import sendQR
-import getStudentID
-from checkEmail import checkEmail
+from functionalities import database, getStudentID, generateQR, sendQR, checkEmail
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from tkcalendar import Calendar
 import datetime
-import akademix
+import os
 
 
 cursorObject = database.cursorObject
@@ -30,7 +26,7 @@ def addStudent():
 
     def back():
         window.destroy()
-        akademix.homeScreen()
+        os.system('python .\main.py')
 
     def clear():
         window.destroy()
@@ -45,6 +41,7 @@ def addStudent():
             if passEntry.get() == database.dataBase._password:
                 firstName = e_firstName.get()
                 lastName = e_lastName.get()
+                gender = dropdown_gender.get()
                 grade = dropdown_grade.get()
                 section = dropdown_section.get()
                 dob = datetime.datetime.strptime(
@@ -56,9 +53,9 @@ def addStudent():
                 address = e_address.get()
 
             # Insert new student record into STUDENT
-                sql = "INSERT INTO STUDENT (FIRST_NAME, LAST_NAME, CLASS, SECTION, DOB, CONTACT_NO, EMAIL, MOTHER_NAME, FATHER_NAME, ADDRESS)\
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                val = (firstName, lastName, grade, section, dob,
+                sql = "INSERT INTO STUDENT (FIRST_NAME, LAST_NAME, CLASS, SECTION, GENDER, DOB, CONTACT_NO, EMAIL, MOTHER_NAME, FATHER_NAME, ADDRESS)\
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                val = (firstName, lastName, grade, section, gender, dob,
                        contact, email, motherName, fatherName, address)
                 cursorObject.execute(sql, val)
                 dataBase.commit()
@@ -92,6 +89,9 @@ def addStudent():
     dropdown_section = StringVar(window)
     dropdown_section.set("Select Section")
 
+    dropdown_gender = StringVar(window)
+    dropdown_gender.set("Male")
+
     def callback(*args):
         if int(dropdown_grade.get()) <= 10:
             e_section = OptionMenu(window, dropdown_section, "A", "B")
@@ -100,21 +100,21 @@ def addStudent():
             e_section = OptionMenu(
                 window, dropdown_section, "Arts", "Commerce", "Science")
         e_section.pack()
-        e_section.place(x=200, y=150)
+        e_section.place(x=200, y=180)
     
     def validateEmail(*args):
-        if checkEmail(e_email.get()):
+        if checkEmail.checkEmail(e_email.get()):
             emailLabel = Label(window, text="   ", width=200)
         else:
             emailLabel = Label(window, text="Please enter a valid Email Address.", foreground='Red')
-        emailLabel.place(x=340, y=240)
+        emailLabel.place(x=340, y=270)
 
     def validatePhone(*args):
         if len(e_contact.get()) == 10:
            phoneLabel = Label(window, text="   ", width=200)
         else:
             phoneLabel = Label(window, text="Please enter a valid Contact No.", foreground='Red')
-        phoneLabel.place(x=340, y=210)
+        phoneLabel.place(x=340, y=240)
 
 
     # Add Button and Label
@@ -128,57 +128,62 @@ def addStudent():
     firstName.place(x=20, y=60)
     lastName = Label(window, text="Enter Last Name:", font=('bold', 10))
     lastName.place(x=20, y=90)
+    gender = Label(window, text="Gender:", font=('bold', 10))
+    gender.place(x=20,y=120)
     grade = Label(window, text="Enter Class:", font=('bold', 10))
-    grade.place(x=20, y=120)
+    grade.place(x=20, y=150)
     section = Label(window, text="Enter Section:", font=('bold', 10))
-    section.place(x=20, y=150)
+    section.place(x=20, y=180)
     dob = Label(window, text="Enter Date of Birth:", font=('bold', 10))
-    dob.place(x=20, y=180)
+    dob.place(x=20, y=210)
     contact = Label(window, text="Enter Contact No.:", font=('bold', 10))
-    contact.place(x=20, y=210)
+    contact.place(x=20, y=240)
     email = Label(window, text="Enter Email Address:", font=('bold', 10))
-    email.place(x=20, y=240)
+    email.place(x=20, y=270)
     motherName = Label(window, text="Enter Mother's Name:", font=('bold', 10))
-    motherName.place(x=20, y=270)
+    motherName.place(x=20, y=300)
     fatherName = Label(window, text="Enter Father's Name:", font=('bold', 10))
-    fatherName.place(x=20, y=300)
+    fatherName.place(x=20, y=330)
     address = Label(window, text="Enter Address:", font=('bold', 10))
-    address.place(x=20, y=330)
+    address.place(x=20, y=360)
     date = Label(window, text="")
-    date.place(x=300, y=180)
+    date.place(x=300, y=210)
 
     e_firstName = Entry()
     e_firstName.place(x=200, y=60)
     e_lastName = Entry()
     e_lastName.place(x=200, y=90)
+    e_gender = OptionMenu(window, dropdown_gender, "Male", "Female", "Other")
+    e_gender.pack()
+    e_gender.place(x=200, y=120)
     e_grade = OptionMenu(window, dropdown_grade, "1", "2",
                          "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
     e_grade.pack()
-    e_grade.place(x=200, y=120)
+    e_grade.place(x=200, y=150)
     dobbtn = Button(window, text="Select Date", font=(
         'italic', 8), bg="white", command=setDate)
-    dobbtn.place(x=200, y=180)
+    dobbtn.place(x=200, y=210)
     contactVar = StringVar()
     contactVar.trace("w", validatePhone)
     e_contact = Entry(textvariable=contactVar)
-    e_contact.place(x=200, y=210)
+    e_contact.place(x=200, y=240)
     emailVar = StringVar()
     emailVar.trace("w", validateEmail)
     e_email = Entry(textvariable=emailVar)
-    e_email.place(x=200, y=240)
+    e_email.place(x=200, y=270)
     e_motherName = Entry()
-    e_motherName.place(x=200, y=270)
+    e_motherName.place(x=200, y=300)
     e_fatherName = Entry()
-    e_fatherName.place(x=200, y=300)
+    e_fatherName.place(x=200, y=330)
     e_address = Entry()
-    e_address.place(x=200, y=330)
+    e_address.place(x=200, y=360)
 
     insertbtn = Button(window, text="Add Student to Database", font=(
         'italic', 10), bg="white", command=insert)
-    insertbtn.place(x=200, y=360)
+    insertbtn.place(x=200, y=390)
     clearbtn = Button(window, text="Clear", font=(
         'italic', 10), bg="white", command=clear)
-    clearbtn.place(x=450, y=360)
+    clearbtn.place(x=450, y=390)
     homebtn = Button(window, text="< Back", font=(
         'italic', 10), bg="white", command=back)
     homebtn.place(x=20, y=20)
