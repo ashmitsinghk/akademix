@@ -32,8 +32,8 @@ def viewStudent(admission_no):
                 os.remove(f"./QR/QR_STUDENT_{admission_no}.png")
                 messagebox.showinfo("Operation Successful", "Student Data Removed Successfully.")
                 root2.destroy()
-                searchStudent.searchStudent()
                 back()
+                searchStudent.searchStudent()
             else:
                 errorLabel = Label(
                     root2, text="Incorrect Password, Please try again.")
