@@ -1,4 +1,3 @@
-# Import QRCode from pyqrcode
 import pyqrcode
 import png
 

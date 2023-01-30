@@ -54,7 +54,7 @@ def viewStudent(admission_no):
 
     def edit():
         root.destroy()
-        editStudent.editStudent(admission_no, firstName, lastName, grade, section, dob, contact, email, motherName, fatherName, address)
+        editStudent.editStudent(admission_no, firstName, lastName, gender, grade, section, dob, contact, email, motherName, fatherName, address)
 
 
     sql = f"SELECT * FROM STUDENT WHERE STUDENT_ID = {admission_no};"

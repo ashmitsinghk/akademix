@@ -7,7 +7,6 @@ def sendQR(studentID, studentEmail):
     Sender_Email = "akademixrecords@gmail.com"
     Reciever_Email = studentEmail
 
-    ## !! CHANGE THIS PASSWORD TO APP PASSWORD AFTER 2FA IN GOOGLE
     Password = "jbafgvdpehdpsldn"
 
     newMessage = EmailMessage()
